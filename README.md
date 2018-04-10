@@ -8,7 +8,7 @@
 
 In normal Slow Start algorithm, the congestion window (cwnd) is increases by 1 on receipt of acknowledgement of every successful packet transfer.
 This means that twice the number of packets can be sent in the next RTT. But, by doing this, there can be bulk consecutive packet losses. 
-Thus, to avoid such losses, Cautious Slow Start algorithm has been intrduced in which the Congestion window is increased cautiously.
+Thus, to avoid such losses, Cautious Slow Start algorithm has been introduced in which the Congestion window is increased cautiously.
 
 There are total 4 scenarios in the Cautious Slow Start Algorithm.
 
@@ -34,7 +34,7 @@ Thus, Current RTT is only marginally higher than Average RTT.
 
 Thus, Congestion window is incremented by 0.5.
 
-#### Scenario 3 : When Current RTT >=Average RTT and k<cwnd/2
+#### Scenario 3 : When Current RTT >=Average RTT and 1<k<cwnd/2
 
 This indicates that the congestion present in the network is moderate and Congestion window is Incremented by a fraction of k/cwnd.
 
