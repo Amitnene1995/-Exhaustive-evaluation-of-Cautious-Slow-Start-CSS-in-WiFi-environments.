@@ -1,19 +1,45 @@
-This is ns-3-allinone.
+# Exhaustive evaluation of Cautious Slow Start in WiFi environments.
 
-If you have downloaded this in tarball release format, this directory
-contains some released ns-3 version, along with 3rd party components
-necessary to support all optional ns-3 features, such as Python
-bindings and the Network Animator.  In this case, just run the
-script build.py; all the components, plus ns-3 itself, will thus be
-built.  This directory also contains the bake build tool, which allows
-access to several additional modules including the Network Simulation
-Cradle, Direct Code Execution environment, and click and openflow 
-extensions for ns-3.
+## Course Code: CS821
 
-If you have downloaded this from mercurial, the download.py script will
-download bake, netanim, pybindgen, and ns-3-dev.  The usage to use
-basic ns-3 (netanim and ns-3-dev) is to type:
-./download.py
-./build.py
-and cd into ns-3-dev for further work.  Consult the bake documentation
-on how to use bake to access optional ns-3 components.
+## Assignment No 12
+
+### Overview about Cautious Slow Start
+
+In normal Slow Start algorithm, the congestion window (cwnd) is increases by 1 on receipt of acknowledgement of every successful packet transfer.
+This means that twice the number of packets can be sent in the next RTT. But, by doing this, there can be bulk consecutive packet losses. 
+Thus, to avoid such losses, Cautious Slow Start algorithm has been intrduced in which the Congestion window is increased cautiously.
+
+There are total 4 scenarios in the Cautious Slow Start Algorithm.
+
+#### Scenario 1 : When Average RTT < Current RTT.
+
+In this case, we can safely conclude that there is no congestion in the network.
+
+Thus, congestion window size is incremented by 1.
+
+Average RTT is calculated as 
+
+avgRTT = ((avgRTT∗(n−1))+curRTT)/n
+
+where n is the number of packets whose acknowledgements have been received.
+
+#### Scenario 2 : When Current RTT >=Average RTT and k >= cwnd/2
+
+k is defined as Average RTT / (Current RTT - Average RTT)
+
+Thus, higher the value of k, lower will be the difference between Current RTT and Average RTT.
+
+Thus, Current RTT is only marginally higher than Average RTT.
+
+Thus, Congestion window is incremented by 0.5.
+
+#### Scenario 3 : When Current RTT >=Average RTT and k<cwnd/2
+
+This indicates that the congestion present in the network is moderate and Congestion window is Incremented by a fraction of k/cwnd.
+
+#### Scenario 4 : When Current RTT >=Average RTT and 0<k<1
+
+Low value of k indicates that there is huge difference between Current RTT and Average RTT.
+
+Thus , Congestion window size remains the same.
